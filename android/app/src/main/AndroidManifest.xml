@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_firebase">
+    package="com.ogikun.flutter-firebase">
    <application
         android:label="flutter_firebase"
         android:name="${applicationName}"

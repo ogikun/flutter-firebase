@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
-  runApp(MyTodoApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyTodoApp());
 }
 
 class MyTodoApp extends StatelessWidget {
@@ -98,8 +105,9 @@ class _TodoAddPageState extends State<TodoAddPage> {
             SizedBox(
               width: double.infinity,
               child:  ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(_text);
+                onPressed: () async {
+                  await FirebaseFirestore.instance.collection('todoList').add({'text': _text});
+                  Navigator.of(context).pop();
                 },
                 child: const Text('リスト追加', style: TextStyle(color: Colors.white)),
               ),
